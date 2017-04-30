@@ -1,6 +1,5 @@
 package com.example.android.popularmovies.model;
 
-
 /**
  * Created by monika on 2017-04-20.
  */
@@ -13,7 +12,7 @@ public class ItemModel {
    */
 
     private String imgUrl;
-    private String original_title;
+    private String title;
     private String id;
     private String release_date;
     private String vote_average;
@@ -27,12 +26,12 @@ public class ItemModel {
         this.imgUrl = imgUrl;
     }
 
-    public String getOriginalTitle() {
-        return original_title;
+    public String getTitle() {
+        return title;
     }
 
-    public void setOriginalTitle(String title) {
-        this.original_title = title;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getId() {

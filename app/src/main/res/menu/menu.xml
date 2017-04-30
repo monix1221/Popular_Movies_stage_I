@@ -10,10 +10,24 @@
         android:orderInCategory="1"
         android:title="REFRESH"
         app:showAsAction="ifRoom"/>
+
+    <group android:checkableBehavior="single">
+
     <item
-        android:id="@+id/action_search"
+        android:id="@+id/sort_by_popular"
         android:orderInCategory="1"
-        android:title="Settings"
+        android:title="@string/popular"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/sort_by_top_rated"
+        android:orderInCategory="2"
+        android:title="@string/top_rated"
+        app:showAsAction="never"/>
+
+    </group>
+
+
+
+
         <!--app:showAsAction= "never": shows 3 dots, "ifRoom": shows title if there is room-->
 </menu>

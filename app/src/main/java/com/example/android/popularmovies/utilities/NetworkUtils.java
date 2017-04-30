@@ -12,7 +12,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
-
 /**
  * Created by monika on 2017-04-16.
  */
@@ -23,7 +22,7 @@ public class NetworkUtils {
 
     public static URL buildUrl(MoviePreferences preferredSortOrder) {
         // building the proper URL query
-        switch(preferredSortOrder){
+        switch (preferredSortOrder) {
             case POPULAR:
                 MOVIE_URL = Keys.SORT_BY_POPULAR_URL;
                 break;
@@ -43,7 +42,6 @@ public class NetworkUtils {
         return url;
     }
 
-
     public static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {
@@ -62,7 +60,4 @@ public class NetworkUtils {
             urlConnection.disconnect();
         }
     }
-
-
-
 }

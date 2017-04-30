@@ -2,6 +2,15 @@
     <string name="app_name">Popular Movies</string>
     <string name="release_date">Release date:</string>
     <string name="vote_average">Vote average:</string>
+    <string name="overview">Overview</string>
+    <string name="movie_title">Movie title</string>
     <string name="ten">/10</string>
+    <string name="error_message">Ooops, something\'s wrong! \nTry to hit refresh button or check your internet connection</string>
+    <string name="popular">Popular</string>
+    <string name="top_rated">Top-rated</string>
+    <string name="sorted_popular">Sorted by popular</string>
+    <string name="sorted_top_rated">Sorted by top-rated</string>
+
+
 
 </resources>
