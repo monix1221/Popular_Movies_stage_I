@@ -72,6 +72,21 @@
                             android:padding="5dp"
                             android:text="@string/vote_average"
                             android:textSize="16sp" />
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/button_add_fav_movie"
+                            android:text="@string/add_fav_movie"
+                            android:visibility="visible"
+                            />
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/button_delete_fav_movie"
+                            android:text="@string/delete_fav_movie"
+                            android:visibility="gone"
+                            />
+
                     </LinearLayout>
                 </LinearLayout>
 

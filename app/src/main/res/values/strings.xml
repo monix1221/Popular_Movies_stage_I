@@ -10,7 +10,11 @@
     <string name="top_rated">Top-rated</string>
     <string name="sorted_popular">Sorted by popular</string>
     <string name="sorted_top_rated">Sorted by top-rated</string>
-
-
-
+    <string name="my_favourites">My favourites</string>
+    <string name="your_fav_movies">Your favourites movies</string>
+    <string name="add_fav_movie">Add to favourites</string>
+    <string name="delete_fav_movie">Delete from favourites</string>
+    <string name="toast_added_to_fav">Added to favourites!</string>
+    <string name="toast_deleted_to_fav">Deleted from favourites!</string>
+    <string name="error_adding_fav">Oops, something\'s wrong. Can\'t add to favourites</string>
 </resources>

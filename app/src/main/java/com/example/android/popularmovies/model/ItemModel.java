@@ -16,18 +16,20 @@ public class ItemModel implements Parcelable {
 
     String imgUrl;
     String title;
-    String id;
+    int id;
     String release_date;
     String vote_average;
     String overview;
+    //String check_box;
 
     public ItemModel(Parcel in) {
+        id = in.readInt();
         imgUrl = in.readString();
         title = in.readString();
-        id = in.readString();
         release_date = in.readString();
         vote_average = in.readString();
         overview = in.readString();
+        //check_box=in.readString();
     }
 
     public static final Creator<ItemModel> CREATOR = new Creator<ItemModel>() {
@@ -62,11 +64,11 @@ public class ItemModel implements Parcelable {
         this.title = title;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -103,7 +105,7 @@ public class ItemModel implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(imgUrl);
         dest.writeString(title);
-        dest.writeString(id);
+        dest.writeInt(id);
         dest.writeString(release_date);
         dest.writeString(vote_average);
         dest.writeString(overview);

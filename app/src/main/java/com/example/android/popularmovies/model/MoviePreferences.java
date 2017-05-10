@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 public enum MoviePreferences implements Parcelable {
 
-    POPULAR("POPULAR"), TOP_RATED("TOP_RATED");
+    POPULAR("POPULAR"), TOP_RATED("TOP_RATED"), FAVOURITES_MOVIES("FAVOURITES_MOVIES");
     private String option;
 
     MoviePreferences(String option){

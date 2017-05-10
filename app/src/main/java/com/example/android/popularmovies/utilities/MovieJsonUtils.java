@@ -62,7 +62,7 @@ public class MovieJsonUtils {
             JSONObject object = movieArray.getJSONObject(i);
             String title = object.optString(MV_TITLE);
             String poster = object.optString(MV_POSTER_PATH);
-            String id = object.optString(MV_ID);
+            int id = object.optInt(MV_ID);
             String releaseDate = object.optString(MV_RELEASE_DATE);
             String voteAvg = object.optString(MV_VOTE_AVERAGE);
             String overview = object.optString(MV_OVERVIEW);
