@@ -21,7 +21,8 @@ import com.example.android.popularmovies.utilities.NetworkUtils;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements ImageAdapter.ImageAdapterOnClickHandler {
+
+public class MainActivity extends AppCompatActivity implements ImageAdapter.ImageAdapterOnClickHandler{
 
     //needed only for intent
     public static final String MOVIE_TITLE = "movie_title";
@@ -31,10 +32,21 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.Imag
     public static final String MOVIE_SYNOPSIS = "movie_synopsis";
 
     //a field for binding views data in activity_main.xml
+    //binding is used to avoid using heavy findViewById
     ActivityMainBinding binding;
 
     private ImageAdapter mImageAdapter;
     private ArrayList<ItemModel> gridItemsData;
+
+    MoviePreferences mSortOrderState=null;
+    private static final String SELECTED_MOVIE_ORDER = "SelectedMovieOrder";
+
+    //needed for loader:
+    //a constant int to uniquely identify loader
+    /*
+     * This number will uniquely identify our Loader and is chosen arbitrarily. You can change this
+     * to any number you like
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +61,28 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.Imag
         mImageAdapter = new ImageAdapter(MainActivity.this, gridItemsData, this);
         binding.rvImages.setAdapter(mImageAdapter);
 
-        loadMovieData(MoviePreferences.POPULAR);
+        if(savedInstanceState != null){
+            mSortOrderState=savedInstanceState.getParcelable(SELECTED_MOVIE_ORDER);
+        }else{
+            mSortOrderState=MoviePreferences.POPULAR;
+        }
+
+        loadMovieData(mSortOrderState);
 
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelable(SELECTED_MOVIE_ORDER, mSortOrderState);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        loadMovieData(mSortOrderState);
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     private void loadMovieData(MoviePreferences preferences) {
@@ -95,7 +125,8 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.Imag
 
             case R.id.action_refresh:
                 mImageAdapter.setMovieData(null);
-                setListToPopular();
+                loadMovieData(mSortOrderState);
+                //setListToPopular();
                 return true;
 
             case R.id.sort_by_popular:
@@ -105,6 +136,8 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.Imag
                 mImageAdapter.setMovieData(null);
 
                 setListToPopular();
+                //
+                mSortOrderState=MoviePreferences.POPULAR;
                 String textToShow = getString(R.string.sorted_popular);
                 Toast.makeText(MainActivity.this, textToShow, Toast.LENGTH_SHORT).show();
                 return true; //must say true here!
@@ -115,6 +148,8 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.Imag
                 else item.setChecked(true);
 
                 setListToTopRated();
+                //
+                mSortOrderState=MoviePreferences.TOP_RATED;
                 String textToShow2 = getString(R.string.sorted_top_rated);
                 Toast.makeText(MainActivity.this, textToShow2, Toast.LENGTH_SHORT).show();
                 return true;
@@ -180,4 +215,6 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.Imag
             }
         }
     }
+
+
 }
