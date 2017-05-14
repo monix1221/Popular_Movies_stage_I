@@ -9,29 +9,6 @@ import android.os.Parcelable;
 
 public class ItemModel implements Parcelable {
 
-  /*
-  * Class represents each movie-item data;
-  * using methods of this class we will be able to get each movies' needed details
-   */
-
-    String imgUrl;
-    String title;
-    int id;
-    String release_date;
-    String vote_average;
-    String overview;
-    //String check_box;
-
-    public ItemModel(Parcel in) {
-        id = in.readInt();
-        imgUrl = in.readString();
-        title = in.readString();
-        release_date = in.readString();
-        vote_average = in.readString();
-        overview = in.readString();
-        //check_box=in.readString();
-    }
-
     public static final Creator<ItemModel> CREATOR = new Creator<ItemModel>() {
         @Override
         public ItemModel createFromParcel(Parcel in) {
@@ -43,9 +20,27 @@ public class ItemModel implements Parcelable {
             return new ItemModel[size];
         }
     };
+    /*
+    * Class represents each movie-item data;
+    * using methods of this class we will be able to get each movies' needed details
+     */
+    String imgUrl;
+    String title;
+    int id;
+    String release_date;
+    String vote_average;
+    String overview;
+
+    public ItemModel(Parcel in) {
+        id = in.readInt();
+        imgUrl = in.readString();
+        title = in.readString();
+        release_date = in.readString();
+        vote_average = in.readString();
+        overview = in.readString();
+    }
 
     public ItemModel() {
-
     }
 
     public String getImgUrl() {
@@ -111,16 +106,3 @@ public class ItemModel implements Parcelable {
         dest.writeString(overview);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

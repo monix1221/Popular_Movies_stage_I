@@ -72,20 +72,27 @@
                             android:padding="5dp"
                             android:text="@string/vote_average"
                             android:textSize="16sp" />
+
                         <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
                             android:id="@+id/button_add_fav_movie"
-                            android:text="@string/add_fav_movie"
-                            android:visibility="visible"
-                            />
-                        <Button
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:text="@string/add_fav_movie"
+                            android:visibility="visible" />
+
+                        <Button
                             android:id="@+id/button_delete_fav_movie"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:text="@string/delete_fav_movie"
-                            android:visibility="gone"
-                            />
+                            android:visibility="gone" />
+
+                        <Button
+                            android:id="@+id/button_share_intent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/button_share"
+                            android:visibility="visible" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -106,6 +113,43 @@
                     android:layout_height="1dp"
                     android:layout_margin="15dp"
                     android:background="@android:color/background_dark" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_trailer_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    tools:listitem="@layout/trailer_list" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="15dp"
+                    android:background="@android:color/background_dark" />
+
+                <TextView
+                    android:id="@+id/tv_detail_reviews"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="16dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="32dp"
+                    android:text="@string/reviews"
+                    android:textSize="24sp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_review_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    tools:listitem="@layout/review_list" />
             </LinearLayout>
         </ScrollView>
     </FrameLayout>

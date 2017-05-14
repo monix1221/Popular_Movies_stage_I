@@ -3,6 +3,7 @@
     <string name="release_date">Release date:</string>
     <string name="vote_average">Vote average:</string>
     <string name="overview">Overview</string>
+    <string name="reviews">Reviews</string>
     <string name="movie_title">Movie title</string>
     <string name="ten">/10</string>
     <string name="error_message">Ooops, something\'s wrong! \nTry to hit refresh button or check your internet connection</string>
@@ -17,4 +18,14 @@
     <string name="toast_added_to_fav">Added to favourites!</string>
     <string name="toast_deleted_to_fav">Deleted from favourites!</string>
     <string name="error_adding_fav">Oops, something\'s wrong. Can\'t add to favourites</string>
+    <string name="read_more">Read more</string>
+    <string name="read_less">Read less</string>
+    <string name="author">Author</string>
+    <string name="button_share">Share</string>
+    <string name="example_review">Here is some example review of some excellent and breathtaking movie!</string>
+    <string name="checkout_movie">Hey! Checkout this movie! </string>
+    <string name="ooops_somethings_wrong">Oops, something\'s wrong! </string>
+    <string name="send_via_email">Send via email</string>
+    <string name="share_to_facebook">Share to Facebook</string>
+    <string name="send_message">Send as message</string>
 </resources>

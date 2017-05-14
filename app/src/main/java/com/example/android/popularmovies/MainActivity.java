@@ -27,34 +27,28 @@ import com.example.android.popularmovies.utilities.NetworkUtils;
 import java.net.URL;
 import java.util.ArrayList;
 
+public class MainActivity extends AppCompatActivity implements ImageAdapter.ImageAdapterOnClickHandler, LoaderManager.LoaderCallbacks<ArrayList<ItemModel>> {
 
-public class MainActivity extends AppCompatActivity implements ImageAdapter.ImageAdapterOnClickHandler, LoaderManager.LoaderCallbacks<ArrayList<ItemModel>>{
-
-    //needed only for intent
+    //needed only for intent which will be send to DetailActivity
     public static final String MOVIE_TITLE = "movie_title";
     public static final String MOVIE_IMAGE = "movie_image";
     public static final String MOVIE_RELEASE_DATE = "movie_release_date";
     public static final String MOVIE_VOTES = "movie_votes";
-    public static final String MOVIE_SYNOPSIS = "movie_synopsis";
+    public static final String MOVIE_OVERVIEW = "movie_overview";
     public static final String MOVIE_ID = "movie_id";
-
-    //a field for binding views data in activity_main.xml
-    //binding is used to avoid using heavy findViewById
-    ActivityMainBinding binding;
-
-    private ImageAdapter mImageAdapter;
-    private ArrayList<ItemModel> gridItemsData;
-
-    MoviePreferences mSortOrderState=null;
     private static final String SELECTED_MOVIE_ORDER = "SelectedMovieOrder";
     private static final String LOADING_INDICATOR_STATE = "indicator_state";
-
     /*
      * This number will uniquely identify Loader and is chosen arbitrarily.
      * It can be any number
      */
     private static final int MOVIE_SEARCH_LOADER = 22;
-
+    //a field for binding views data in activity_main.xml
+    //binding is used to avoid using heavy findViewById
+    ActivityMainBinding binding;
+    MoviePreferences mSortOrderState = null;
+    private ImageAdapter mImageAdapter;
+    private ArrayList<ItemModel> gridItemsData;
     private SQLiteDatabase mDb;
 
     @Override
@@ -110,12 +104,10 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.Imag
             loaderManager.initLoader(MOVIE_SEARCH_LOADER, queryBundle, this);
             mImageAdapter.setMovieData(null);
             loadMovieData(mSortOrderState);
-
         } else {
             queryBundle.putParcelable(SELECTED_MOVIE_ORDER, sortOrderPreference);
             loaderManager.restartLoader(MOVIE_SEARCH_LOADER, queryBundle, this);
         }
-
     }
 
     private void setListToTopRated() {
@@ -161,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.Imag
                 else item.setChecked(true);
 
                 mImageAdapter.setMovieData(null);
-                mSortOrderState=MoviePreferences.POPULAR;
+                mSortOrderState = MoviePreferences.POPULAR;
                 setListToPopular();
 
                 String textToShow = getString(R.string.sorted_popular);
@@ -173,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.Imag
                 if (item.isChecked()) item.setChecked(false);
                 else item.setChecked(true);
 
-                mSortOrderState=MoviePreferences.TOP_RATED;
+                mSortOrderState = MoviePreferences.TOP_RATED;
                 setListToTopRated();
 
                 String textToShow2 = getString(R.string.sorted_top_rated);
@@ -188,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.Imag
                 mImageAdapter.setMovieData(FavoriteQueries());
                 showMovieDataGridView();
                 binding.pbLoadingIndicator.setVisibility(View.INVISIBLE);
-                mSortOrderState=MoviePreferences.FAVOURITES_MOVIES;
+                mSortOrderState = MoviePreferences.FAVOURITES_MOVIES;
 
                 String textToShow3 = getString(R.string.your_fav_movies);
                 Toast.makeText(MainActivity.this, textToShow3, Toast.LENGTH_SHORT).show();
@@ -205,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.Imag
 
         intentToStartDetailActivity.putExtra(MOVIE_IMAGE, movieResults.getImgUrl());
         intentToStartDetailActivity.putExtra(MOVIE_TITLE, movieResults.getTitle());
-        intentToStartDetailActivity.putExtra(MOVIE_SYNOPSIS, movieResults.getOverview());
+        intentToStartDetailActivity.putExtra(MOVIE_OVERVIEW, movieResults.getOverview());
         intentToStartDetailActivity.putExtra(MOVIE_RELEASE_DATE, movieResults.getReleaseDate());
         intentToStartDetailActivity.putExtra(MOVIE_VOTES, movieResults.getVoteAvg());
         intentToStartDetailActivity.putExtra(MOVIE_ID, movieResults.getId());
@@ -219,7 +211,6 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.Imag
 
             //needed for caching the results (we won't forceLoad again if we already got the results)
             ArrayList<ItemModel> mMovieResults;
-
 
             @Override
             protected void onStartLoading() {
@@ -235,9 +226,9 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.Imag
                  */
                 binding.pbLoadingIndicator.setVisibility(View.VISIBLE);
 
-                if (mMovieResults != null){
+                if (mMovieResults != null) {
                     deliverResult(mMovieResults);
-                }else {
+                } else {
                     forceLoad();
                 }
             }
@@ -245,17 +236,16 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.Imag
             @Override
             public ArrayList<ItemModel> loadInBackground() {
 
-
                 // Get the String for our URL from the bundle passed to onCreateLoader
                 MoviePreferences searchQueryUrlString = args.getParcelable(SELECTED_MOVIE_ORDER);
 
                 if (searchQueryUrlString == null) {
-                    mSortOrderState=MoviePreferences.POPULAR;
+                    mSortOrderState = MoviePreferences.POPULAR;
                 }
 
-                if(searchQueryUrlString == MoviePreferences.FAVOURITES_MOVIES){
+                if (searchQueryUrlString == MoviePreferences.FAVOURITES_MOVIES) {
                     return FavoriteQueries();
-                } else if (searchQueryUrlString != MoviePreferences.FAVOURITES_MOVIES){
+                } else if (searchQueryUrlString != MoviePreferences.FAVOURITES_MOVIES) {
                 /* Parse the URL from the passed in String and perform the search */
                     String movieSearchResults = null;
                     try {
@@ -272,13 +262,11 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.Imag
                     }
                 }
                 return null;
-
-
             }
 
             @Override
             public void deliverResult(ArrayList<ItemModel> data) {
-                mMovieResults=data;
+                mMovieResults = data;
                 super.deliverResult(data);
             }
         };
@@ -307,6 +295,7 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.Imag
 
     /**
      * returns a Cursor
+     *
      * @return
      */
     private Cursor getAllMovies() {
@@ -322,12 +311,12 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.Imag
         );
     }
 
-    public  ArrayList<ItemModel> FavoriteQueries() {
-        ArrayList<ItemModel> favoriteMovies=new ArrayList<ItemModel>();
+    public ArrayList<ItemModel> FavoriteQueries() {
+        ArrayList<ItemModel> favoriteMovies = new ArrayList<ItemModel>();
         Cursor c = getAllMovies();
         if (c != null && c.moveToFirst()) {
             do {
-                //id, tytul, poster, releasedate, rating, plot
+                //id, title, poster, releasedate, rating, plot
                 ItemModel OneFavMovie = new ItemModel();
                 OneFavMovie.setId(c.getInt(0));
                 OneFavMovie.setTitle(c.getString(1));

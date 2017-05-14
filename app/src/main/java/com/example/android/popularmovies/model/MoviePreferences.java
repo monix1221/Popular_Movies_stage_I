@@ -12,20 +12,6 @@ import java.io.Serializable;
 public enum MoviePreferences implements Parcelable {
 
     POPULAR("POPULAR"), TOP_RATED("TOP_RATED"), FAVOURITES_MOVIES("FAVOURITES_MOVIES");
-    private String option;
-
-    MoviePreferences(String option){
-        this.option = option;
-    }
-
-    public String getName(){
-        return option;
-    }
-
-    private void setOption(String option){
-        this.option = option;
-    }
-
     public static final Parcelable.Creator<MoviePreferences> CREATOR = new Parcelable.Creator<MoviePreferences>() {
 
         public MoviePreferences createFromParcel(Parcel in) {
@@ -39,6 +25,19 @@ public enum MoviePreferences implements Parcelable {
         }
 
     };
+    private String option;
+
+    MoviePreferences(String option) {
+        this.option = option;
+    }
+
+    public String getName() {
+        return option;
+    }
+
+    public void setOption(String option) {
+        this.option = option;
+    }
 
     @Override
     public int describeContents() {

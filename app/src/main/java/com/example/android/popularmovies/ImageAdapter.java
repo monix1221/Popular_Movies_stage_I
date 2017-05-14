@@ -65,10 +65,14 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageAdapter
 
     public ItemModel getItem(int i) {
         ItemModel movieItem = null;
-        if(mGridItemMovieData != null)
+        if (mGridItemMovieData != null)
             movieItem = mGridItemMovieData.get(i);
 
         return movieItem;
+    }
+
+    public ArrayList<ItemModel> getMoviesList() {
+        return mGridItemMovieData;
     }
 
     //interface to handle user's clicks on the image in Main Activity
@@ -106,10 +110,5 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageAdapter
             ItemModel movie = mGridItemMovieData.get(adapterPosition);
             mClickHandler.onClick(movie);
         }
-    }
-
-
-    public ArrayList<ItemModel> getMoviesList() {
-        return mGridItemMovieData;
     }
 }

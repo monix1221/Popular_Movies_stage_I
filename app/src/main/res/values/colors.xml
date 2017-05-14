@@ -5,4 +5,5 @@
     <color name="colorAccent">#70a2f5</color>
     <color name="colorBackground">#dadce6</color>
     <color name="colorBackgroundMedium">#c5c8d9</color>
+    <color name="read_more_review">#42444b</color>
 </resources>
