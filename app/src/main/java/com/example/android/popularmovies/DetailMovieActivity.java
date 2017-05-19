@@ -32,6 +32,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import static java.security.AccessController.getContext;
+
 public class DetailMovieActivity extends AppCompatActivity implements TrailerAdapter.TrailerAdapterOnClickHandler,
         FetchTrailersTask.Listener, ReviewAdapter.ReviewAdapterOnClickHandler,
         FetchReviewTask.Listener {
@@ -236,6 +238,15 @@ public class DetailMovieActivity extends AppCompatActivity implements TrailerAda
     }
 
     private Cursor getAllMovies() {
+        Cursor cursor = getApplicationContext().getContentResolver().query(
+                MovieContract.MovieEntry.CONTENT_URI,
+                new String[]{MovieContract.MovieEntry.COLUMN_ID},
+                MovieContract.MovieEntry.COLUMN_ID + " = " + itemMovieModel.getId(),
+                null,
+                null);
+        return cursor;
+        //we are using content provider, so we dont do below (we dont query SQL DB)
+        /*
         return mDb.query(
                 MovieContract.MovieEntry.TABLE_NAME,
                 null,
@@ -244,7 +255,7 @@ public class DetailMovieActivity extends AppCompatActivity implements TrailerAda
                 null,
                 null,
                 MovieContract.MovieEntry.COLUMN_ID
-        );
+        );*/
     }
 
     private void addMovieToFavorites(int id, ItemModel model) {
@@ -258,15 +269,18 @@ public class DetailMovieActivity extends AppCompatActivity implements TrailerAda
         cv.put(MovieContract.MovieEntry.COLUMN_MOVIE_RATING, model.getVoteAvg());
         cv.put(MovieContract.MovieEntry.COLUMN_MOVIE_PLOT, model.getOverview());
 
+
         try {
-            mDb.insert(MovieContract.MovieEntry.TABLE_NAME, null, cv);
+            //mDb.insert(MovieContract.MovieEntry.TABLE_NAME, null, cv);    //we dont need it here because we are using content provider below
+            getApplicationContext().getContentResolver().insert(MovieContract.MovieEntry.CONTENT_URI, cv);
         } catch (Exception e) {
             Toast.makeText(this, R.string.error_adding_fav + "" + e, Toast.LENGTH_LONG).show();
         }
     }
 
     private void removeFavouriteMovie(int id) {
-        mDb.delete(MovieContract.MovieEntry.TABLE_NAME,
+        //mDb.delete(MovieContract.MovieEntry.TABLE_NAME, MovieContract.MovieEntry.COLUMN_ID + " = " + id, null);
+        getApplicationContext().getContentResolver().delete(MovieContract.MovieEntry.CONTENT_URI,
                 MovieContract.MovieEntry.COLUMN_ID + " = " + id, null);
     }
 
